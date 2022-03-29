@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Notes = (props) => {
   let history = useHistory();
-  const my_notes = props.notes
+  
+  const my_notes = useSelector((state)=> state.word);
   const notes_title = my_notes.title;
 
   return (
