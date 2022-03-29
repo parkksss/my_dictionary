@@ -9,7 +9,7 @@ const initialState = {
 const LOAD   = 'word/LOAD';
 const CREATE = 'word/CREATE';
 const UPDATE = 'word/UPDATE';
-const REMOVE = 'word/REMOVE';
+const DELETE = 'word/DELETE';
 
 
 // Action Creators
@@ -25,8 +25,8 @@ export function updateWord(notes) {
   return { type: UPDATE, notes };
 }
 
-export function removeWord(notes) {
-  return { type: REMOVE, notes };
+export function deleteWord(notes_index) {
+  return { type: DELETE, notes_index };
 }
 
 
@@ -41,6 +41,20 @@ export default function reducer(state = initialState, action = {}) {
       const new_desc = [...state.desc, action.notes.desc];
       const new_use = [...state.use, action.notes.use];
       return { title: new_title, desc: new_desc, use: new_use };
+    
+    case "word/DELETE": {
+      console.log(state, action);
+      const new_title = state.title.filter((l, idx) => {
+        return parseInt(action.notes_index) !== idx;
+      })
+      const new_desc = state.desc.filter((l, idx) => {
+        return parseInt(action.notes_index) !== idx;
+      })
+      const new_use = state.use.filter((l, idx) => {
+        return parseInt(action.notes_index) !== idx;
+      })
+      return { title: new_title, desc: new_desc, use: new_use };
+    }
 
     default: return state;
   }
