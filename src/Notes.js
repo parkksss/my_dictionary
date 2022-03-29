@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from "react-router-dom";
 
 const Notes = (props) => {
+  let history = useHistory();
   const my_notes = props.notes
   const notes_title = my_notes.title;
 
@@ -13,14 +15,27 @@ const Notes = (props) => {
             <h3>{my_notes.title[idx]}</h3>
             <p>{my_notes.desc[idx]}</p>
             <p>{my_notes.use[idx]}</p>
+            <button onClick={()=>{
+              const word = my_notes.title[idx].split(" ")[0]
+              history.push("/edit/"+ word);
+            }}>수정</button>
           </NoteWrap>
         );
       })}
+      <button
+        onClick={() => {
+          history.push("/add");
+        }}>
+        추가하기
+      </button>
     </div>
   );
 }
 
 const NoteWrap = styled.div`
+  width: 95%;
+  max-width: 500px;
+  margin-top: 25px;
   padding: 16px;
   margin-bottom: 20px;
   border: 2px solid #ddd;
