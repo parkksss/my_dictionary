@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const Notes = (props) => {
   let history = useHistory();
-  
+
   const my_notes = useSelector((state)=> state.word);
   const notes_title = my_notes.title;
 
@@ -18,8 +18,8 @@ const Notes = (props) => {
             <p>{my_notes.desc[idx]}</p>
             <p>{my_notes.use[idx]}</p>
             <button onClick={()=>{
-              const word = my_notes.title[idx].split(" ")[0]
-              history.push("/edit/"+ word);
+              // const word = my_notes.title[idx].split(" ")[0]
+              history.push("/edit/"+ idx);
             }}>수정</button>
           </NoteWrap>
         );
