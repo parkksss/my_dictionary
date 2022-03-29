@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Notes = (props) => {
   const my_notes = props.notes
   const notes_title = my_notes.title;
-  console.log(my_notes)
+
   return (
     <div>
       {notes_title.map((v, idx)=>{
