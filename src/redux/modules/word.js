@@ -37,9 +37,9 @@ export default function reducer(state = initialState, action = {}) {
       return state;
 
     case "word/CREATE":
-      const new_title = [...state.title, action.notes];
-      const new_desc = [...state.title, action.notes];
-      const new_use = [...state.title, action.notes];
+      const new_title = [...state.title, action.notes.title];
+      const new_desc = [...state.desc, action.notes.desc];
+      const new_use = [...state.use, action.notes.use];
       return { title: new_title, desc: new_desc, use: new_use };
 
     default: return state;
