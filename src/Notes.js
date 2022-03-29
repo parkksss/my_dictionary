@@ -2,17 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Notes = (props) => {
-  const my_notes = props.notes;
-
+  const my_notes = props.notes
+  const notes_title = my_notes.title;
+  console.log(my_notes)
   return (
     <div>
-      {my_notes.map((dic, index)=>{
-        console.log(dic);
+      {notes_title.map((v, idx)=>{
         return (
-          <NoteWrap key={index}>
-            <h3>{dic.title}</h3>
-            <p>{dic.desc}</p>
-            <p>{dic.use}</p>
+          <NoteWrap key={idx}>
+            <h3>{my_notes.title[idx]}</h3>
+            <p>{my_notes.desc[idx]}</p>
+            <p>{my_notes.use[idx]}</p>
           </NoteWrap>
         );
       })}

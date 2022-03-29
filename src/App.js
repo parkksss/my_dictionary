@@ -6,17 +6,16 @@ import Add from './Add'
 
 function App() {
 
-  const notes = [
-    {title: 'split() 메서드', 
-    desc: '지정한 구분자를 이용하여 여러 개의 문자열로 나눈다', 
-    use: 'str.split([separator[, limit]])'},
-    {title: 'join() 메서드', 
-    desc: '배열의 모든 요소를 연결해 하나의 문자열로 만든다', 
-    use: 'arr.join([separator])'}, 
-    {title: 'map() 메서드', 
-    desc: '배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환한다', 
-    use: 'arr.map(callback(currentValue[, index[, array]])[, thisArg])'}, 
-  ] 
+  const notes = {
+    title: ['split() 메서드', 'join() 메서드', 'map() 메서드'],
+    desc: ['지정한 구분자를 이용하여 여러 개의 문자열로 나눈다', '배열의 모든 요소를 연결해 하나의 문자열로 만든다', '배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환한다'],
+    use: ['str.split([separator[, limit]])', 'arr.join([separator])', 'arr.map(callback(currentValue[, index[, array]])[, thisArg])']
+  };
+  // const notes = [
+  //   {title: 'split() 메서드', 
+  //   desc: '지정한 구분자를 이용하여 여러 개의 문자열로 나눈다', 
+  //   use: 'str.split([separator[, limit]])'},
+  // ] 
 
   return (
     <AppWrap className="App">
