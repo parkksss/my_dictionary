@@ -27,6 +27,7 @@ function App() {
       <Container>
         <Notes notes={notes}/>
       </Container>
+      <Add/>
       <button>추가하기</button>
     </AppWrap>
   );

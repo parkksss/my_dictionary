@@ -25,8 +25,6 @@ const NoteWrap = styled.div`
   margin-bottom: 20px;
   border: 2px solid #ddd;
   border-radius: 10px;
-  // display: flex;
-  // flex-direction: column;
 `;
 
 export default Notes;
