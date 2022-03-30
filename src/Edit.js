@@ -24,15 +24,24 @@ const Edit = (props) => {
     const new_title = input_t.current.value;
     const new_desc = input_d.current.value;
     const new_use = input_u.current.value;
+    if (new_title === '' || new_desc === '' || new_use === ''){
+      alert('빈 항목을 채워주세요!');
+      return
+    }
     dispatch(updateWordFB({id: my_notes[note_idx].id, title: new_title, desc: new_desc, use: new_use, check: my_notes[note_idx].check}));
     history.push("/");
+  };
+
+  const handleSubmit = (e) => {
+    // submit을 할 때 페이지 자체가 새로고침이 되는 것을 막음
+    e.preventDefault();
   };
 
   return (
     <Note>
       <h3>단어 수정하기</h3>
       
-      <AddForm> 
+      <AddForm onSubmit={handleSubmit}> 
         <label>단어</label>
         <input type="text" defaultValue={my_notes[note_idx].title} ref={input_t}/>
         <label>설명</label>
@@ -50,12 +59,12 @@ const Note = styled.div`
   max-width: 500px;
   height: 500px;
   margin-top: 100px;
-  border: 2px solid green;
+  border: 2px solid #11680f;
   border-radius: 10px;
   padding: 20px 0px;
   box-sizing: border-box;
   h3 {
-    color: green;
+    color: #11680f;
     text-align: center;
     margin-bottom: 50px;
   }
@@ -70,7 +79,7 @@ const AddForm = styled.form`
     margin-top: 80px;
     width: 100%;
     height: 40px;
-    background-color: green;
+    background-color: #11680f;
     color: white;
     border: none;
     border-radius: 5px;
@@ -82,7 +91,7 @@ const AddForm = styled.form`
     border-bottom: 2px solid #ddd;
     margin: 10px 0px 20px;
     &:focus {
-      border-bottom: 2px solid green;
+      border-bottom: 2px solid #11680f;
     }
   }
 `;

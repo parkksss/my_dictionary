@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteWordFB, checkWordFB } from "./redux/modules/word";
 // import { collection, doc, deleteDoc } from "firebase/firestore";
 
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import BuildCircleOutlinedIcon from '@mui/icons-material/BuildCircleOutlined';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
+
 
 const Notes = (props) => {
   let history = useHistory();
@@ -39,12 +40,12 @@ const Notes = (props) => {
           </NoteWrap>
         );
       })}
-      <AddCircleIcon className="addBtnStyles"
+      <AddCircleRoundedIcon className="addBtnStyles"
         onClick={() => {
           history.push("/add");
         }}>
         추가하기
-      </AddCircleIcon>
+      </AddCircleRoundedIcon>
     </Container>
   );
 }
@@ -56,7 +57,7 @@ const Container = styled.div`
   margin-top: 55px;
   padding: 25px;
   .addBtnStyles {
-    color: green; 
+    color: #11680f; 
     font-size: 65px; 
     cursor: pointer; 
     position: fixed; 
@@ -71,9 +72,9 @@ const NoteWrap = styled.div`
   max-width: 600px;
   padding: 15px 25px;
   margin: 10px;
-  border: 2px solid green;
+  border: 2px solid #11680f;
   border-radius: 10px;
-  background-color: ${(props) => (props.check ? "green" : "transparent")};
+  background-color: ${(props) => (props.check ? "#11680f" : "transparent")};
   color: ${(props) => (props.check ? "white" : "black")};
   .blue {
     color: ${(props) => (props.check ? "yellow" : "blue")};
@@ -84,7 +85,7 @@ const BtnGroup = styled.div`
   position: absolute;
   top: 20px;
   right: 20px;
-  color: ${(props) => (props.check ? "white" : "green")};
+  color: ${(props) => (props.check ? "white" : "#11680f")};
   .btn {
     font-size: 30px;
   }
