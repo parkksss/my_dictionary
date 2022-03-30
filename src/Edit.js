@@ -8,7 +8,7 @@ const Edit = (props) => {
   const params = useParams();
   const note_idx = params.idx;
 
-  const notes_title = my_notes.title;
+  // const notes_title = my_notes.title;
   return (
     <Note>
       <h3>단어 수정하기</h3>
