@@ -19,11 +19,7 @@ const CHECK = 'word/CHECK';
 const DELETE = 'word/DELETE';
 
 const initialState = {
-  list: [
-    { title: 'split() 메서드', desc: '지정한 구분자를 이용하여 여러 개의 문자열로 나눈다', use: 'str.split([separator[, limit]])', check: false },
-    { title: 'join() 메서드', desc: '배열의 모든 요소를 연결해 하나의 문자열로 만든다', use: 'arr.join([separator])', check: false },
-    { title: 'map() 메서드', desc: '배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환한다', use: 'arr.map(callback(currentValue[, index[, array]])[, thisArg])', check: false },
-  ]
+  list: [ ]
 };
 
 // Action Creators
@@ -44,6 +40,7 @@ export function checkWord(notes_index) {
 }
 
 export function deleteWord(notes_index) {
+  console.log("지울 버킷 인덱스", notes_index)
   return { type: DELETE, notes_index };
 }
 
@@ -53,7 +50,7 @@ export const loadWordFB = () => {
     const note_data = await getDocs(collection(db, "dictionary"));
     let word_list  = [];
     note_data.forEach((w) => {
-      word_list.push({...w.data()});
+      word_list.push({ id: w.id,...w.data()});
     });
     dispatch(loadWord(word_list));
   }
@@ -67,6 +64,40 @@ export const createWordFB = (notes) => {
     dispatch(createWord(notes_data));
   }
 }
+
+export const checkWordFB = (word_id) => {
+	return async function (dispatch, getState) {
+    const docRef = doc(db, "dictionary", word_id);
+		await updateDoc(docRef, { check: true });
+    
+    const _word_list = getState().word.list;
+    const word_index = _word_list.findIndex((w) => {
+      return w.id === word_id
+    })
+
+    dispatch(checkWord(word_index));
+    // console.log(getState().word);
+	} 
+};
+
+export const deleteWordFB = (word_id) => {
+	return async function (dispatch, getState) {
+    if(!word_id){
+      window.alert("아이디가 없어요!");
+      return;
+    }
+		const docRef = doc(db, "dictionary", word_id);
+		await deleteDoc(docRef);
+
+    const _word_list = getState().word.list;
+    const word_index = _word_list.findIndex((w) => {
+       return w.id === word_id;
+     });
+
+     dispatch(deleteWord(word_index));
+	}
+}
+
 
 
 // Reducer
