@@ -22,17 +22,16 @@ const Notes = (props) => {
         return (
           <NoteWrap key={idx} check={v.check}>
             <h3>{v.title}</h3>
-
             <p>{v.desc}</p>
-            <p>{v.use}</p>
-            <BtnGroup>
-              <CheckCircleOutlineRoundedIcon check={v.check} className="btn" onClick={()=>{
-                dispatch(checkWordFB(v.id));
+            <p className="blue" check={v.check}>{v.use}</p>
+            <BtnGroup check={v.check}>
+              <CheckCircleOutlineRoundedIcon className="btn" onClick={()=>{
+                dispatch(checkWordFB(v.id, v.check));
                 }}>확인</CheckCircleOutlineRoundedIcon>
-              <BuildCircleOutlinedIcon check={v.check} className="btn" onClick={()=>{
+              <BuildCircleOutlinedIcon className="btn" onClick={()=>{
                 history.push("/edit/"+ idx);
                 }}>수정</BuildCircleOutlinedIcon>
-              <HighlightOffRoundedIcon check={v.check} className="btn" onClick={()=>{
+              <HighlightOffRoundedIcon className="btn" onClick={()=>{
                 dispatch(deleteWordFB(v.id));
                 history.push("/");
                 }}>삭제</HighlightOffRoundedIcon>
@@ -72,18 +71,21 @@ const NoteWrap = styled.div`
   max-width: 600px;
   padding: 15px 25px;
   margin: 10px;
-  border: 2px solid black;
+  border: 2px solid green;
   border-radius: 10px;
   background-color: ${(props) => (props.check ? "green" : "transparent")};
   color: ${(props) => (props.check ? "white" : "black")};
+  .blue {
+    color: ${(props) => (props.check ? "yellow" : "blue")};
+  }
 `;
 
 const BtnGroup = styled.div`
   position: absolute;
   top: 20px;
   right: 20px;
+  color: ${(props) => (props.check ? "white" : "green")};
   .btn {
-    // color: ${(props) => (props.check ? "white" : "black")};
     font-size: 30px;
   }
 `;

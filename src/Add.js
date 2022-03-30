@@ -20,10 +20,6 @@ const Add = (props) => {
     dispatch(createWordFB({title: new_title, desc: new_desc, use: new_use, check: false}));
     history.push("/");
   };
-  // const handleSubmit = (e) => {
-  //   // submit을 할 때 페이지 자체가 새로고침이 되는 것을 막음
-  //   e.preventDefault();
-  // };
   
   return (
     <Note>

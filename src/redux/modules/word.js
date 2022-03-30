@@ -48,9 +48,11 @@ export function deleteWord(notes_index) {
 export const loadWordFB = () => {
   return async function (dispatch) {
     const note_data = await getDocs(collection(db, "dictionary"));
+    console.log(note_data)
     let word_list  = [];
     note_data.forEach((w) => {
       word_list.push({ id: w.id,...w.data()});
+      console.log(w)
     });
     dispatch(loadWord(word_list));
   }
@@ -65,11 +67,11 @@ export const createWordFB = (notes) => {
   }
 }
 
-export const checkWordFB = (word_id) => {
+export const checkWordFB = (word_id, word_check) => {
 	return async function (dispatch, getState) {
     const docRef = doc(db, "dictionary", word_id);
-		await updateDoc(docRef, { check: true });
-    
+    const state = word_check ? false : true;
+    await updateDoc(docRef, { check: state });
     const _word_list = getState().word.list;
     const word_index = _word_list.findIndex((w) => {
       return w.id === word_id

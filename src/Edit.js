@@ -30,19 +30,41 @@ const Note = styled.div`
   width: 95%;
   max-width: 500px;
   height: 500px;
-  margin-top: 25px;
-  border: 2px solid #ddd;
+  margin-top: 100px;
+  border: 2px solid green;
   border-radius: 10px;
+  padding: 20px 0px;
+  box-sizing: border-box;
   h3 {
+    color: green;
     text-align: center;
+    margin-bottom: 50px;
   }
 `;
 const AddForm = styled.form`
+  width: 80%;
+  margin: auto;
   padding: 0 20px 20px;
   display: flex;
   flex-direction: column;
   button {
-    margin-top: 10px;
+    margin-top: 80px;
+    width: 100%;
+    height: 40px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  input {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #ddd;
+    margin: 10px 0px 20px;
+    &:focus {
+      border-bottom: 2px solid green;
+    }
   }
 `;
 
