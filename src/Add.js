@@ -8,11 +8,6 @@ import { useHistory } from "react-router-dom";
 const Add = (props) => {
   let history = useHistory();
   const dispatch = useDispatch();
-  // const [notes, setNotes] = React.useState({
-  //   title: ['split() 메서드', 'join() 메서드', 'map() 메서드'],
-  //   desc: ['지정한 구분자를 이용하여 여러 개의 문자열로 나눈다', '배열의 모든 요소를 연결해 하나의 문자열로 만든다', '배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환한다'],
-  //   use: ['str.split([separator[, limit]])', 'arr.join([separator])', 'arr.map(callback(currentValue[, index[, array]])[, thisArg])']
-  // });
 
   const input_t = React.useRef(null); 
   const input_d = React.useRef(null); 
@@ -51,19 +46,41 @@ const Note = styled.div`
   width: 95%;
   max-width: 500px;
   height: 500px;
-  margin-top: 25px;
-  border: 2px solid #ddd;
+  margin-top: 100px;
+  border: 2px solid green;
   border-radius: 10px;
+  padding: 20px 0px;
+  box-sizing: border-box;
   h3 {
+    color: green;
     text-align: center;
+    margin-bottom: 50px;
   }
 `;
 const AddForm = styled.form`
+  width: 80%;
+  margin: auto;
   padding: 0 20px 20px;
   display: flex;
   flex-direction: column;
   button {
-    margin-top: 10px;
+    margin-top: 80px;
+    width: 100%;
+    height: 40px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  input {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #ddd;
+    margin: 10px 0px 20px;
+    &:focus {
+      border-bottom: 2px solid green;
+    }
   }
 `;
 
