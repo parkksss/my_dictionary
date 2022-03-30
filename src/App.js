@@ -20,8 +20,7 @@ function App() {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(loadWordFB());
-    // console.log(db);
-  }, []); // 디펜던시 어레이도 만들어줌
+  }, []);
 
 
   return (

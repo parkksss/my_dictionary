@@ -1,13 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { updateWordFB } from "./redux/modules/word";
+import { useHistory } from "react-router-dom";
 
 const Edit = (props) => {
+  let history = useHistory();
 
   const my_notes = useSelector((state)=> state.word.list);
   const params = useParams();
   const note_idx = params.idx;
+  const dispatch = useDispatch();
+
+  console.log(my_notes)
+
+  const input_t = React.useRef(null); 
+  const input_d = React.useRef(null); 
+  const input_u = React.useRef(null); 
+
+  const editNote = () => {
+    const new_title = input_t.current.value;
+    const new_desc = input_d.current.value;
+    const new_use = input_u.current.value;
+    dispatch(updateWordFB({id: my_notes[note_idx].id, title: new_title, desc: new_desc, use: new_use, check: my_notes[note_idx].check}));
+    history.push("/");
+  };
 
   return (
     <Note>
@@ -15,12 +34,12 @@ const Edit = (props) => {
       
       <AddForm> 
         <label>단어</label>
-        <input type="text" defaultValue={my_notes[note_idx].title}/>
+        <input type="text" defaultValue={my_notes[note_idx].title} ref={input_t}/>
         <label>설명</label>
-        <input type="text" defaultValue={my_notes[note_idx].desc}/>
+        <input type="text" defaultValue={my_notes[note_idx].desc} ref={input_d}/>
         <label>구문</label>
-        <input type="text" defaultValue={my_notes[note_idx].use}/>
-        <button type="submit" value="Submit">수정하기</button>
+        <input type="text" defaultValue={my_notes[note_idx].use} ref={input_u}/>
+        <button type="submit" value="Submit" onClick={editNote}>수정하기</button>
       </AddForm>
     </Note>
   );

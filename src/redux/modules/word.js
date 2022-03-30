@@ -10,7 +10,6 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-
 // Actions
 const LOAD   = 'word/LOAD';
 const CREATE = 'word/CREATE';
@@ -19,7 +18,7 @@ const CHECK = 'word/CHECK';
 const DELETE = 'word/DELETE';
 
 const initialState = {
-  list: [ ]
+  list: []
 };
 
 // Action Creators
@@ -40,7 +39,6 @@ export function checkWord(notes_index) {
 }
 
 export function deleteWord(notes_index) {
-  console.log("지울 버킷 인덱스", notes_index)
   return { type: DELETE, notes_index };
 }
 
@@ -48,11 +46,9 @@ export function deleteWord(notes_index) {
 export const loadWordFB = () => {
   return async function (dispatch) {
     const note_data = await getDocs(collection(db, "dictionary"));
-    console.log(note_data)
     let word_list  = [];
     note_data.forEach((w) => {
       word_list.push({ id: w.id,...w.data()});
-      console.log(w)
     });
     dispatch(loadWord(word_list));
   }
@@ -67,6 +63,20 @@ export const createWordFB = (notes) => {
   }
 }
 
+export const updateWordFB = (notes) => {
+	return async function (dispatch, getState) {
+    const word_id = notes.id
+    const docRef = doc(db, "dictionary", word_id);
+    const newword = await updateDoc(docRef, { ...notes });
+    const new_data = await getDocs(collection(db, "dictionary"));
+    let word_list  = [];
+    new_data.forEach((w) => {
+      word_list.push({ id: w.id,...w.data()});
+    });
+    dispatch(updateWord(word_list));
+	} 
+};
+
 export const checkWordFB = (word_id, word_check) => {
 	return async function (dispatch, getState) {
     const docRef = doc(db, "dictionary", word_id);
@@ -78,7 +88,6 @@ export const checkWordFB = (word_id, word_check) => {
     })
 
     dispatch(checkWord(word_index));
-    // console.log(getState().word);
 	} 
 };
 
@@ -111,8 +120,10 @@ export default function reducer(state = initialState, action = {}) {
     case "word/CREATE":
       return { list: [...state.list, action.notes] };
 
+    case "word/UPDATE":
+      return { list: action.notes};
+
     case "word/CHECK":
-      
       const new_list = state.list.map((l, idx) => {
         if (action.notes_index === idx) {
           return l.check === true ? { ...l, check: false } : { ...l, check: true };
