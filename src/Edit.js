@@ -4,22 +4,22 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Edit = (props) => {
-  const my_notes = useSelector((state)=> state.word);
+
+  const my_notes = useSelector((state)=> state.word.list);
   const params = useParams();
   const note_idx = params.idx;
 
-  // const notes_title = my_notes.title;
   return (
     <Note>
       <h3>단어 수정하기</h3>
       
       <AddForm> 
         <label>단어</label>
-        <input type="text" defaultValue={my_notes.title[note_idx]}/>
+        <input type="text" defaultValue={my_notes[note_idx].title}/>
         <label>설명</label>
-        <input type="text" defaultValue={my_notes.desc[note_idx]}/>
+        <input type="text" defaultValue={my_notes[note_idx].desc}/>
         <label>구문</label>
-        <input type="text" defaultValue={my_notes.use[note_idx]}/>
+        <input type="text" defaultValue={my_notes[note_idx].use}/>
         <button type="submit" value="Submit">수정하기</button>
       </AddForm>
     </Note>

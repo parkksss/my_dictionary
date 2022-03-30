@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route, Link } from "react-router-dom";
+import {db} from "./firebase";
+import {loadWordFB} from "./redux/modules/word";
+import { useDispatch, useSelector } from "react-redux";
 
 import Notes from './Notes'
 import Add from './Add'
@@ -13,6 +16,12 @@ function App() {
     desc: ['지정한 구분자를 이용하여 여러 개의 문자열로 나눈다', '배열의 모든 요소를 연결해 하나의 문자열로 만든다', '배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환한다'],
     use: ['str.split([separator[, limit]])', 'arr.join([separator])', 'arr.map(callback(currentValue[, index[, array]])[, thisArg])']
   });
+
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(loadWordFB());
+    // console.log(db);
+  }, []); // 디펜던시 어레이도 만들어줌
 
 
   return (

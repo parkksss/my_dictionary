@@ -8,17 +8,16 @@ const Notes = (props) => {
   let history = useHistory();
   const dispatch = useDispatch();
 
-  const my_notes = useSelector((state)=> state.word);
-  const notes_title = my_notes.title;
+  const my_notes = useSelector((state)=> state.word.list);
 
   return (
     <div>
-      {notes_title.map((v, idx)=>{
+      {my_notes.map((v, idx)=>{
         return (
-          <NoteWrap key={idx} check={my_notes.check[idx]}>
-            <h3>{my_notes.title[idx]}</h3>
-            <p>{my_notes.desc[idx]}</p>
-            <p>{my_notes.use[idx]}</p>
+          <NoteWrap key={idx} check={v.check}>
+            <h3>{v.title}</h3>
+            <p>{v.desc}</p>
+            <p>{v.use}</p>
             <div>
               <button onClick={()=>{
                 dispatch(checkWord(idx));
