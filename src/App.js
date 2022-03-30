@@ -28,7 +28,7 @@ function App() {
     <AppWrap className="App">
         <Header className="App-header">
           <Link style={{'text-decoration': 'none' }} to="/"><h1>나만의 단어장</h1></Link>
-          <hr/>
+          {/* <hr/> */}
         </Header>
         <Route path="/" exact>
           <Notes notes={notes}/>
@@ -52,8 +52,11 @@ const AppWrap = styled.div`
 `;
 
 const Header = styled.header`
+  position: fixed;
+  background-color: white;
   text-align: center;
   width: 100%;
+  z-index: 1;
   h1 {
     color: #303030;
   }

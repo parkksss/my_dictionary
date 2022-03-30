@@ -17,49 +17,75 @@ const Notes = (props) => {
   const my_notes = useSelector((state)=> state.word.list);
 
   return (
-    <div>
+    <Container>
       {my_notes.map((v, idx)=>{
         return (
           <NoteWrap key={idx} check={v.check}>
             <h3>{v.title}</h3>
+
             <p>{v.desc}</p>
             <p>{v.use}</p>
-            <div>
-              <CheckCircleOutlineRoundedIcon onClick={()=>{
+            <BtnGroup>
+              <CheckCircleOutlineRoundedIcon check={v.check} className="btn" onClick={()=>{
                 dispatch(checkWordFB(v.id));
                 }}>확인</CheckCircleOutlineRoundedIcon>
-              <BuildCircleOutlinedIcon onClick={()=>{
-                // const word = my_notes.title[idx].split(" ")[0]
+              <BuildCircleOutlinedIcon check={v.check} className="btn" onClick={()=>{
                 history.push("/edit/"+ idx);
                 }}>수정</BuildCircleOutlinedIcon>
-              <HighlightOffRoundedIcon onClick={()=>{
+              <HighlightOffRoundedIcon check={v.check} className="btn" onClick={()=>{
                 dispatch(deleteWordFB(v.id));
                 history.push("/");
                 }}>삭제</HighlightOffRoundedIcon>
-            </div>
+            </BtnGroup>
           </NoteWrap>
         );
       })}
-      <AddCircleIcon style={{'color': 'green', 'font-size': '50px', 'cursor': 'pointer'}}
+      <AddCircleIcon className="addBtnStyles"
         onClick={() => {
           history.push("/add");
         }}>
         추가하기
       </AddCircleIcon>
-    </div>
+    </Container>
   );
 }
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1500px;
+  margin-top: 55px;
+  padding: 25px;
+  .addBtnStyles {
+    color: green; 
+    font-size: 65px; 
+    cursor: pointer; 
+    position: fixed; 
+    bottom: 30px;
+    right: 30px;
+  }
+`;
 
 const NoteWrap = styled.div`
+  position: relative;
   width: 95%;
-  max-width: 500px;
-  margin-top: 25px;
-  padding: 16px;
-  margin-bottom: 20px;
-  border: 2px solid green;
+  max-width: 600px;
+  padding: 15px 25px;
+  margin: 10px;
+  border: 2px solid black;
   border-radius: 10px;
   background-color: ${(props) => (props.check ? "green" : "transparent")};
   color: ${(props) => (props.check ? "white" : "black")};
+`;
+
+const BtnGroup = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  .btn {
+    // color: ${(props) => (props.check ? "white" : "black")};
+    font-size: 30px;
+  }
 `;
 
 export default Notes;
